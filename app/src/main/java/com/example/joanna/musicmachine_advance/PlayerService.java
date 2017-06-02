@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Messenger;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,13 +14,7 @@ import android.util.Log;
 public class PlayerService extends Service {
     private static final String TAG =PlayerService.class.getSimpleName() ;
     private MediaPlayer mPlayer;
-    private IBinder mbinder=new LocalBinder();
-
-    public class LocalBinder extends Binder{
-        public PlayerService getService(){
-            return PlayerService.this;
-        }
-    }
+    private Messenger messenger=new Messenger(new PlayHandler(this));
     @Override
     public void onCreate() {
         Log.d(TAG,"onCreate");
@@ -41,7 +36,7 @@ public class PlayerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG,"onBind");
-        return mbinder;
+        return messenger.getBinder();
     }
 
     @Override
