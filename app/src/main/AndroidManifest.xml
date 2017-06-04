@@ -19,7 +19,7 @@
         <service android:name=".DownloadService"/>
         <service android:name=".DownloadIntentService"/>
         <service android:name=".PlayerService"
-                   android:process="PlayProcess"/>
+                 android:process=":playerprocess"/>
     </application>
 
 </manifest>

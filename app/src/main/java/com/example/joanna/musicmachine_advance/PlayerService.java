@@ -14,7 +14,7 @@ import android.util.Log;
 public class PlayerService extends Service {
     private static final String TAG =PlayerService.class.getSimpleName() ;
     private MediaPlayer mPlayer;
-    private Messenger messenger=new Messenger(new PlayHandler(this));
+    public Messenger messenger=new Messenger(new PlayHandler(this));
     @Override
     public void onCreate() {
         Log.d(TAG,"onCreate");

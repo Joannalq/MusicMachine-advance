@@ -27,6 +27,10 @@ public class PlayHandler extends Handler {
                int isplaying=mPlayerService.isPlaying()?1:0;
                Message message=Message.obtain();
                message.arg1=isplaying;
+               if(msg.arg2==1){
+                   message.arg2=1;
+               }
+               message.replyTo=mPlayerService.messenger;
                try {
                    msg.replyTo.send(message);
                } catch (RemoteException e) {
