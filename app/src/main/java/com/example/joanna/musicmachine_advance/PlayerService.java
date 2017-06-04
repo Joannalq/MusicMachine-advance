@@ -1,5 +1,6 @@
 package com.example.joanna.musicmachine_advance;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -23,10 +24,17 @@ public class PlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        //foreground Service
+        Notification.Builder builder=new Notification.Builder(this);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        Notification notification=builder.build();
+        startForeground(19,notification);
+
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 stopSelf();
+                stopForeground(true);
             }
         });
         return Service.START_NOT_STICKY;
